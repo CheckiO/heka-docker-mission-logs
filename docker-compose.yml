@@ -1,0 +1,10 @@
+heka:
+  build: .
+  restart: always
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+  ports:
+    - 4352:4352
+  environment:
+    ELASTIC_INDEX: "mission-log-%{2006.01.02}"
+    ELASTIC_SERVER: "http://analytics.empireofcode.com:9200"

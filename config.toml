@@ -1,0 +1,18 @@
+[DockerLogInput]
+decoder = "TutumDecoder"
+fields_from_env = [ "EMPIRE_MISSION_NAME", "EMPIRE_USER_NAME", "EMPIRE_USER_ENV"]
+
+[TutumDecoder]
+
+[ESJsonEncoder]
+index = "%ENV[ELASTIC_INDEX]"
+es_index_from_timestamp = true
+type_name = "%{Logger}"
+
+[ElasticSearchOutput]
+message_matcher = "TRUE"
+server = "%ENV[ELASTIC_SERVER]"
+flush_interval = 5000
+flush_count = 10
+max_message_size = 1048576
+encoder = "ESJsonEncoder"
